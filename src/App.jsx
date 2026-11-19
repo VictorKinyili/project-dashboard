@@ -1,7 +1,9 @@
+ import React from "react";
+ import HomePage from "./component/HomePage";
  function App(){
 return(
   <div>
-    <h1>ADMIN DASHBOARD</h1>
+    <HomePage />
   </div>
 )
 
