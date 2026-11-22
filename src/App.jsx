@@ -1,12 +1,12 @@
  import { BrowserRouter, Route, Routes } from "react-router-dom";
- import AddProductPage from "./pages/AddProductPage";
+import AddProduct from "./pages/AddProduct";
 
  function App() {
    return (
      <BrowserRouter>
        <Routes>
          <Route path="/" element={<h1>ADMIN DASHBOARD</h1>} />
-         <Route path="/products/new" element={<AddProductPage />} />
+         <Route path="/products/new" element={<AddProduct/>} />
        </Routes>
      </BrowserRouter>
    );
