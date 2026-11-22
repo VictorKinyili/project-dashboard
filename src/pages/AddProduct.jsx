@@ -1,17 +1,18 @@
 import { useState, useId } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { validateProduct } from "../utils/validateProduct";
-import { createProduct } from "../services/productApi";
+import { useProducts } from "../Context/useProducts";
 
 export default function AddProduct() {
   const navigate = useNavigate();
   const baseId = useId();
+  const { addProduct } = useProducts();
 
   const [formData, setFormData] = useState({
     name: "",
     category: "Electronics",
     price: "",
-    stock: "In stock",
+    stockStatus: "In stock",
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -37,14 +38,14 @@ export default function AddProduct() {
 
     setSubmitting(true);
     try {
-      await createProduct({
+      await addProduct({
         name: formData.name.trim(),
         category: formData.category.trim(),
         price: Number(formData.price),
-        stock: formData.stock,
+        stockStatus: formData.stockStatus,
       });
       navigate("/products");
-    } catch (err) {
+    } catch {
       setSubmitError("Could not save product. Make sure JSON Server is running on port 3001.");
     } finally {
       setSubmitting(false);
@@ -52,26 +53,26 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl p-6">
-      <Link to="/products" className="text-xs font-medium text-blue-600 hover:underline">
+    <section className="page add-product-page">
+      <Link to="/products" className="back-link">
         &larr; Back to Products
       </Link>
 
-      <div className="mt-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-        <span className="text-xs font-semibold uppercase text-blue-600">Catalogue</span>
-        <h1 className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">Add New Product</h1>
-        <p className="text-sm text-slate-500">Create a new product entry for the K-TECH store.</p>
+      <div className="product-form">
+        <span className="eyebrow">Catalogue</span>
+        <h1 className="form-title">Add New Product</h1>
+        <p className="form-description">Create a new product entry for the K-TECH store.</p>
 
         {submitError && (
-          <div className="mt-4 rounded-lg bg-red-50 p-3 text-xs font-medium text-red-600">
+          <div className="error-banner">
             {submitError}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} noValidate className="product-form-fields">
           {/* Product Name */}
-          <div>
-            <label htmlFor={`${baseId}-name`} className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+          <div className="form-group">
+            <label htmlFor={`${baseId}-name`}             className="form-label">
               Product Name
             </label>
             <input
@@ -81,14 +82,14 @@ export default function AddProduct() {
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g., Wireless Mouse"
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-600 dark:bg-slate-700"
+              className="form-control"
             />
             {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
           </div>
 
           {/* Category */}
-          <div>
-            <label htmlFor={`${baseId}-category`} className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+          <div className="form-group">
+            <label htmlFor={`${baseId}-category`}             className="form-label">
               Category
             </label>
             <select
@@ -96,7 +97,7 @@ export default function AddProduct() {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-600 dark:bg-slate-700"
+              className="form-control"
             >
               <option value="Electronics">Electronics</option>
               <option value="Audio">Audio</option>
@@ -106,8 +107,8 @@ export default function AddProduct() {
           </div>
 
           {/* Price */}
-          <div>
-            <label htmlFor={`${baseId}-price`} className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+          <div className="form-group">
+            <label htmlFor={`${baseId}-price`}             className="form-label">
               Price (KSh)
             </label>
             <input
@@ -117,47 +118,47 @@ export default function AddProduct() {
               value={formData.price}
               onChange={handleChange}
               placeholder="e.g., 3500"
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-600 dark:bg-slate-700"
+              className="form-control"
             />
             {errors.price && <p className="mt-1 text-xs text-red-600">{errors.price}</p>}
           </div>
 
           {/* Stock Status */}
-          <div>
-            <label htmlFor={`${baseId}-stock`} className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+          <div className="form-group">
+            <label htmlFor={`${baseId}-stockStatus`}             className="form-label">
               Stock Status
             </label>
             <select
-              id={`${baseId}-stock`}
-              name="stock"
-              value={formData.stock}
+              id={`${baseId}-stockStatus`}
+              name="stockStatus"
+              value={formData.stockStatus}
               onChange={handleChange}
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-600 dark:bg-slate-700"
+              className="form-control"
             >
               <option value="In stock">In stock</option>
               <option value="Low stock">Low stock</option>
               <option value="Out of stock">Out of stock</option>
             </select>
-            {errors.stock && <p className="mt-1 text-xs text-red-600">{errors.stock}</p>}
+            {errors.stockStatus && <p className="mt-1 text-xs text-red-600">{errors.stockStatus}</p>}
           </div>
 
-          <div className="flex justify-end gap-3 pt-2">
+          <div className="form-actions">
             <Link
               to="/products"
-              className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-200"
+              className="btn-secondary"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+              className="btn-primary"
             >
               {submitting ? "Saving..." : "Create Product"}
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
