@@ -9,7 +9,7 @@ export default function Products() {
   const debouncedSearch = useDebounce(searchTerm, 300);
   const searchId = useId();
   const searchRef = useRef(null);
-  const { products, loading, error, editProduct, removeProduct } = useProducts();
+  const { products, loading, error, editProduct, removeProduct, refreshProducts } = useProducts();
   const [actionError, setActionError] = useState("");
 
   useEffect(() => {
@@ -78,7 +78,14 @@ export default function Products() {
       </div>
 
       {actionError && <p className="error-banner">{actionError}</p>}
-      {error && <p className="error-banner">{error}. Start the JSON server and refresh.</p>}
+      {error && (
+        <div className="error-banner api-error">
+          <span>{error}. Start JSON Server with <code>npm run server</code>, then retry.</span>
+          <button type="button" className="retry-button" onClick={refreshProducts} disabled={loading}>
+            {loading ? "Connecting..." : "Retry"}
+          </button>
+        </div>
+      )}
       {loading ? (
         <p className="loading-state">Loading products...</p>
       ) : filteredProducts.length === 0 ? (

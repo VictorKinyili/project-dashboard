@@ -145,6 +145,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .error-banner, .success-banner { border-radius: 8px; padding: 12px 14px; font-size: 13px; }
 .error-banner { color: #b53d43; background: #feecec; }
 .success-banner { color: #19724a; background: #e8f7ef; }
+.api-error { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.api-error code { font-weight: 700; }
+.retry-button {
+  flex: 0 0 auto;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: inherit;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.retry-button:disabled { opacity: .6; cursor: wait; }
 .sr-only {
   position: absolute;
   width: 1px;
@@ -352,4 +366,5 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .stats-grid, .dashboard-info-grid, .team-grid { grid-template-columns: 1fr; }
   .detail-form-grid { grid-template-columns: 1fr; }
   .product-form { padding: 18px; }
+  .api-error { align-items: flex-start; flex-direction: column; }
 }

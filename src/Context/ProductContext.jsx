@@ -6,12 +6,21 @@ import { ProductContext } from "./productContext";
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, initialState);
 
-  useEffect(() => {
+  const refreshProducts = useCallback(async () => {
     dispatch({ type: ACTIONS.FETCH_START });
-    getProducts()
-      .then((products) => dispatch({ type: ACTIONS.FETCH_SUCCESS, payload: products }))
-      .catch((error) => dispatch({ type: ACTIONS.FETCH_ERROR, payload: error.message }));
+    try {
+      const products = await getProducts();
+      dispatch({ type: ACTIONS.FETCH_SUCCESS, payload: products });
+      return true;
+    } catch (error) {
+      dispatch({ type: ACTIONS.FETCH_ERROR, payload: error.message });
+      return false;
+    }
   }, []);
+
+  useEffect(() => {
+    refreshProducts();
+  }, [refreshProducts]);
 
   const addProduct = useCallback(async (product) => {
     const created = await createProduct(product);
@@ -31,8 +40,8 @@ export function ProductProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ ...state, addProduct, editProduct, removeProduct }),
-    [state, addProduct, editProduct, removeProduct],
+    () => ({ ...state, addProduct, editProduct, removeProduct, refreshProducts }),
+    [state, addProduct, editProduct, removeProduct, refreshProducts],
   );
 
   return (
