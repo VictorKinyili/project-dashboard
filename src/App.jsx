@@ -3,6 +3,9 @@
  import HomePage from "./component/HomePage";
  import Layout from "./component/LayOut";
  import NotFound from "./component/NotFound";
+import ProductsPage from "./pages/ProductsPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+
  function App(){
 return(
   <>
@@ -13,6 +16,8 @@ return(
           <Route path="products" element={<div>Products Page (Coming Soon)</div>} />
           <Route path="products/new" element={<div>Add Product Page (Coming Soon)</div>} />
           <Route path="products/:id" element={<div>Product Detail Page (Coming Soon)</div>} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="*" element={<NotFound />} />
 
      </Route>
@@ -22,20 +27,20 @@ return(
 )
  }
  export default App
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import ProductsPage from "./pages/ProductsPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
+// import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+// import ProductsPage from "./pages/ProductsPage";
+// import ProductDetailPage from "./pages/ProductDetailPage";
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/products" replace />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/:id" element={<ProductDetailPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-} 
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Navigate to="/products" replace />} />
+//         <Route path="/products" element={<ProductsPage />} />
+//         <Route path="/products/:id" element={<ProductDetailPage />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// } 
  
  
