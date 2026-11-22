@@ -2,7 +2,7 @@
 
   function About(){
 return(
-<div>
+<div style={{background: "#fff", borderRadius: "12px", padding: "20px", border: "1px solid #e2e8f0"}}>
 <p style={{color:"blue"}}>About K-TECH</p>
 <h1 style={{fontWeight:"bold"}}>About us</h1>
 <p style={{fontWeight:"bold"}}>Technology, made simpler.</p>

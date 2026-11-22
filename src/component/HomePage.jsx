@@ -8,7 +8,7 @@ function HomePage(){
     return(
         <div>
             <p style={{color:"blue"}}>Overview</p>
-            <h1>K-TECH</h1>
+            <h1>Dashboard</h1>
             <p>Welcome back. Here's what's happening in your store today.</p>
             <Stock />
             <div style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent: "space-evenly",width: "100%", gap:"10%"}}>
