@@ -5,7 +5,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../services/productApi";
-import { ConfirmModal } from "../components/ConfirmModal";
+import { ConfirmModal } from "../Components/ConfirmModal";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -92,91 +92,84 @@ export default function ProductDetailPage() {
   };
 
   if (isLoading) {
-    return <div className="p-8 text-sm text-slate-500">Loading product...</div>;
+    return <div className="loading-state">Loading product...</div>;
   }
 
   if (error || !product) {
     return (
-      <div className="p-8">
-        <p className="text-sm font-medium text-red-600">
+      <section className="page product-detail-page">
+        <p className="error-banner">
           {error || "Product not found."}
         </p>
-        <Link
-          to="/products"
-          className="mt-4 inline-block text-sm font-semibold text-[#3B76F6] hover:underline"
-        >
+        <Link to="/products" className="back-link">
           ← Back to Products
         </Link>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-8 text-[#15284B] dark:bg-slate-950 dark:text-slate-100">
-      <div className="mb-6">
-        <Link
-          to="/products"
-          className="text-xs font-semibold text-[#3B76F6] hover:underline"
-        >
+    <section className="page product-detail-page">
+      <div className="detail-top">
+        <Link to="/products" className="back-link">
           ← Back to All Products
         </Link>
-        <p className="mt-2 text-xs font-bold tracking-wider text-blue-600 uppercase">
+        <p className="eyebrow">
           Catalogue / Product Details
         </p>
       </div>
 
-      <div className="max-w-2xl rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs dark:border-slate-800 dark:bg-slate-900">
+      <div className="detail-panel">
         {!isEditing ? (
           <>
-            <div className="h-56 w-full overflow-hidden rounded-xl bg-[#E8EFFD] dark:bg-slate-800">
-              {product.imageUrl && (
+            <div className="detail-image">
+              {(product.imageUrl || product.image) && (
                 <img
-                  src={product.imageUrl}
+                  src={product.imageUrl || product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover"
                 />
               )}
             </div>
 
-            <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
+            <div className="detail-heading">
               <div>
-                <h1 className="text-2xl font-bold text-[#15284B] dark:text-white">
+                <h1>
                   {product.name}
                 </h1>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                <p className="detail-meta">
                   {product.category} • {product.stockStatus}
                 </p>
               </div>
-              <p className="text-2xl font-bold text-[#15284B] dark:text-white">
+              <p className="detail-price">
                 KSh {Number(product.price).toLocaleString()}
               </p>
             </div>
 
-            <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+            <div className="detail-actions">
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
-                className="rounded-xl bg-[#E8EFFD] px-4 py-2 text-xs font-semibold text-[#3B76F6] hover:bg-blue-100 dark:bg-blue-950 dark:text-blue-400"
+                className="btn-edit"
               >
                 Edit Product
               </button>
               <button
                 type="button"
                 onClick={() => setIsDeleteModalOpen(true)}
-                className="rounded-xl bg-[#FEE2E2]/70 px-4 py-2 text-xs font-semibold text-[#EF4444] hover:bg-red-100 dark:bg-red-950/60 dark:text-red-400"
+                className="btn-delete"
               >
                 Delete Product
               </button>
             </div>
           </>
         ) : (
-          <form onSubmit={handleUpdateSubmit} className="space-y-4">
-            <h2 className="text-lg font-bold text-[#15284B] dark:text-white">
+          <form onSubmit={handleUpdateSubmit} className="product-form-fields">
+            <h2 className="form-title">
               Edit Product Details
             </h2>
 
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="form-group">
+              <label className="form-label">
                 Product Image URL
               </label>
               <input
@@ -185,12 +178,12 @@ export default function ProductDetailPage() {
                 value={formData.imageUrl}
                 onChange={handleChange}
                 placeholder="https://example.com/product.jpg"
-                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-800"
+                className="form-control"
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="form-group">
+              <label className="form-label">
                 Product Name *
               </label>
               <input
@@ -199,20 +192,20 @@ export default function ProductDetailPage() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-800"
+                className="form-control"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="detail-form-grid">
+              <div className="form-group">
+                <label className="form-label">
                   Category
                 </label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-800"
+                  className="form-control"
                 >
                   <option value="Electronics">Electronics</option>
                   <option value="Audio">Audio</option>
@@ -220,15 +213,15 @@ export default function ProductDetailPage() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <div className="form-group">
+                <label className="form-label">
                   Stock Status
                 </label>
                 <select
                   name="stockStatus"
                   value={formData.stockStatus}
                   onChange={handleChange}
-                  className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-800"
+                  className="form-control"
                 >
                   <option value="In stock">In stock</option>
                   <option value="Low stock">Low stock</option>
@@ -237,8 +230,8 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="form-group">
+              <label className="form-label">
                 Price (KSh) *
               </label>
               <input
@@ -248,23 +241,23 @@ export default function ProductDetailPage() {
                 required
                 value={formData.price}
                 onChange={handleChange}
-                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-800"
+                className="form-control"
               />
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-2">
+            <div className="form-actions">
               <button
                 type="button"
                 disabled={isSaving}
                 onClick={() => setIsEditing(false)}
-                className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                className="btn-secondary"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isSaving}
-                className="rounded-xl bg-[#3B76F6] px-5 py-2 text-xs font-semibold text-white hover:bg-blue-600 disabled:opacity-50"
+                className="btn-primary"
               >
                 {isSaving ? "Saving..." : "Save Changes"}
               </button>
@@ -282,6 +275,6 @@ export default function ProductDetailPage() {
         onConfirm={handleConfirmDelete}
         onCancel={() => setIsDeleteModalOpen(false)}
       />
-    </div>
+    </section>
   );
 }

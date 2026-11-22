@@ -1,61 +1,29 @@
- import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./Components/LayOut";
+import HomePage from "./Components/HomePage";
+import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import NotFound from "./Components/NotFound";
+import { ProductProvider } from "./Context/ProductContext";
+import { ThemeProvider } from "./Context/ThemeContext";
 
- function App() {
-   return (
-     <BrowserRouter>
-       <Routes>
-         <Route path="/" element={<h1>ADMIN DASHBOARD</h1>} />
-         <Route path="/products/new" element={<AddProduct/>} />
-       </Routes>
-     </BrowserRouter>
-   );
- }
-
- export default App;
- import React from "react";
- import {BrowserRouter ,Routes,Route} from "react-router"
- import HomePage from "./component/HomePage";
- import Layout from "./component/LayOut";
- import NotFound from "./component/NotFound";
-import ProductsPage from "./pages/ProductsPage";
-import ProductDetailPage from "../pages/ProductDetailPage";
-
- function App(){
-return(
-  <>
-   <BrowserRouter>
-    <Routes>
-     <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="products" element={<div>Products Page (Coming Soon)</div>} />
-          <Route path="products/new" element={<div>Add Product Page (Coming Soon)</div>} />
-          <Route path="products/:id" element={<div>Product Detail Page (Coming Soon)</div>} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/:id" element={<ProductDetailPage />} />
-          <Route path="*" element={<NotFound />} />
-
-     </Route>
-    </Routes>
-   </BrowserRouter>
-  </>
-)
- }
- export default App
-// import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-// import ProductsPage from "./pages/ProductsPage";
-// import ProductDetailPage from "./pages/ProductDetailPage";
-
-// export default function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<Navigate to="/products" replace />} />
-//         <Route path="/products" element={<ProductsPage />} />
-//         <Route path="/products/:id" element={<ProductDetailPage />} />
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// } 
- 
- 
+export default function App() {
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <ProductProvider>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/new" element={<AddProduct />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </ProductProvider>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+}
