@@ -34,15 +34,16 @@ cd <your-project-folder>
 
 ### 2. Install dependencies
 ```bash
-npm install
+npm ci
 ```
+This installs the development dependencies too, including `json-server` and `concurrently`. Run it from the project root after cloning or pulling changes.
 
 ### 3. Start the app and simulated backend
 Run both the React development server and JSON Server together:
 ```bash
 npm run dev
 ```
-The API is available at `http://localhost:3001/products`. Open the local app URL shown in your terminal (typically `http://localhost:5173`).
+The API is available at `http://localhost:3001/products`. Open the local app URL shown in your terminal (typically `http://localhost:5173`). If the command reports that `json-server` is not found, run `npm ci` first; don't install it globally.
 
 ---
 
