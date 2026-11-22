@@ -37,25 +37,18 @@ cd <your-project-folder>
 npm install
 ```
 
-### 3. Start the simulated backend (`json-server`)
-In your first terminal window, run:
-```bash
-npx json-server --watch db.json --port 3001
-```
-The API will be available at `http://localhost:3001/products`.
-
-### 4. Start the React development server
-In a second terminal window, run:
+### 3. Start the app and simulated backend
+Run both the React development server and JSON Server together:
 ```bash
 npm run dev
 ```
-Open the local URL shown in your terminal (typically `http://localhost:5173`).
+The API is available at `http://localhost:3001/products`. Open the local app URL shown in your terminal (typically `http://localhost:5173`).
 
 ---
 
 ## Running Tests
 
-To run the unit and component test suite with Vitest:
+Tests are optional and currently no test files are included. When tests are added, run them with:
 ```bash
 npm test
 ```
