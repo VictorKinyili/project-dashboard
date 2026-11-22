@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Headphones",
+      "category": "Electronics",
+      "stockStatus": "In stock",
+      "price": 4500,
+      "description": "Noise-cancelling over-ear wireless headphones with 30-hour battery life."
+    },
+    {
+      "id": "2",
+      "name": "Smart Watch Pro",
+      "category": "Electronics",
+      "stockStatus": "In stock",
+      "price": 8900,
+      "description": "Fitness and notification smartwatch with AMOLED display and heart rate monitor."
+    },
+    {
+      "id": "3",
+      "name": "Bluetooth Speaker",
+      "category": "Audio",
+      "stockStatus": "Low stock",
+      "price": 3200,
+      "description": "Portable waterproof speaker with deep bass and USB-C fast charging."
+    },
+    {
+      "id": "4",
+      "name": "Laptop Stand",
+      "category": "Accessories",
+      "stockStatus": "In stock",
+      "price": 2100,
+      "description": "Adjustable aluminum ergonomic stand for 13 to 17-inch laptops."
+    },
+    {
+      "id": "5",
+      "name": "USB-C Hub",
+      "category": "Accessories",
+      "stockStatus": "In stock",
+      "price": 3750,
+      "description": "7-in-1 multiport adapter with HDMI, USB 3.0, and SD card reader."
+    },
+    {
+      "id": "6",
+      "name": "Mechanical Keyboard",
+      "category": "Accessories",
+      "stockStatus": "Low stock",
+      "price": 6400,
+      "description": "Compact tactile mechanical keyboard with customizable backlight."
+    }
+  ]
+}
