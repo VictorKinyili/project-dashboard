@@ -4,7 +4,7 @@
  import Layout from "./component/LayOut";
  import NotFound from "./component/NotFound";
 import ProductsPage from "./pages/ProductsPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductDetailPage from "../pages/ProductDetailPage";
 
  function App(){
 return(
