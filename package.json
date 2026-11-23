@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n api,web \"npm:server\" \"vite\"",
-    "server": "json-server --watch db.json --port 3001",
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm run server\" \"npm run frontend\"",
+    "frontend": "vite",
+    "server": "json-server db.json --host 127.0.0.1 --port 3001",
     "build": "vite build",
     "test": "vitest"
   },
