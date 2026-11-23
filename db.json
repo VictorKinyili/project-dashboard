@@ -48,5 +48,6 @@
       "price": 6400,
       "description": "Compact tactile mechanical keyboard with customizable backlight."
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
