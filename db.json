@@ -47,6 +47,13 @@
       "stockStatus": "Low stock",
       "price": 6400,
       "description": "Compact tactile mechanical keyboard with customizable backlight."
+    },
+    {
+      "name": "rfetgr5h",
+      "category": "Electronics",
+      "price": 566,
+      "stockStatus": "In stock",
+      "id": "ZeS3eG4wAEk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
