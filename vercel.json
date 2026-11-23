@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/products",
+      "destination": "/api/server?resource=products"
+    },
+    {
+      "source": "/api/products/:id",
+      "destination": "/api/server?resource=products&id=:id"
+    },
+    {
+      "source": "/:path((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
