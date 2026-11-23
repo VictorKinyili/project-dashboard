@@ -1,3 +1,4 @@
+clear
 import { useCallback, useEffect, useMemo, useReducer } from "react";
 import { productReducer, initialState, ACTIONS } from "./productReducer";
 import { createProduct, deleteProduct, getProducts, updateProduct } from "../services/productApi";
