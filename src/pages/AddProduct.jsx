@@ -30,8 +30,8 @@ export default function AddProduct() {
     e.preventDefault();
     setSubmitError(null);
 
-    const { isValid, errors: validationErrors } = validateProduct(formData);
-    if (!isValid) {
+    const validationErrors = validateProduct(formData);
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
