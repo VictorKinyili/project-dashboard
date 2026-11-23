@@ -45,6 +45,10 @@ npm run dev
 ```
 The API is available at `http://localhost:3001/products`. Open the local app URL shown in your terminal (typically `http://localhost:5173`). If the command reports that `json-server` is not found, run `npm ci` first; don't install it globally.
 
+### Vercel deployment
+
+The Vercel API serves the products bundled from `db.json`, so product lists and detail pages can load in production. This serverless endpoint is read-only; product changes require a separately hosted persistent backend. Vercel rewrites also send app routes to the SPA entry point.
+
 ---
 
 ## Running Tests
@@ -75,6 +79,7 @@ db.json               # Simulated database for json-server
 ## Known Limitations & Future Improvements
 
 - **Simulated Persistence:** Data changes (`POST`, `PATCH`, `DELETE`) persist locally to `db.json` via `json-server` during development and require the mock server to be running.
+- **Vercel Deployment:** Product list and detail requests read the bundled `db.json`; writes are read-only on Vercel and require a separately hosted persistent backend.
 - **Authentication:** Admin authentication and role-based access control are not included in this sprint scope.
 - **Image Uploads:** Product cards currently use placeholder containers; cloud image upload support is planned for a future sprint.
 
