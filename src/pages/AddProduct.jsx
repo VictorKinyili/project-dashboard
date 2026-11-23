@@ -87,7 +87,7 @@ export default function AddProduct() {
             {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
           </div>
 
-          {/* Category */}
+          {}
           <div className="form-group">
             <label htmlFor={`${baseId}-category`}             className="form-label">
               Category
@@ -106,7 +106,7 @@ export default function AddProduct() {
             {errors.category && <p className="mt-1 text-xs text-red-600">{errors.category}</p>}
           </div>
 
-          {/* Price */}
+          {}
           <div className="form-group">
             <label htmlFor={`${baseId}-price`}             className="form-label">
               Price (KSh)
@@ -123,7 +123,7 @@ export default function AddProduct() {
             {errors.price && <p className="mt-1 text-xs text-red-600">{errors.price}</p>}
           </div>
 
-          {/* Stock Status */}
+          {}
           <div className="form-group">
             <label htmlFor={`${baseId}-stockStatus`}             className="form-label">
               Stock Status
