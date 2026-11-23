@@ -5,7 +5,7 @@
       "name": "Wireless Headphones",
       "category": "Electronics",
       "stockStatus": "In stock",
-      "price": 4500,
+      "price": 450,
       "description": "Noise-cancelling over-ear wireless headphones with 30-hour battery life."
     },
     {
@@ -41,6 +41,11 @@
       "description": "7-in-1 multiport adapter with HDMI, USB 3.0, and SD card reader."
     },
     {
+      "name": "Laptop",
+      "category": "Electronics",
+      "price": 35000,
+      "stockStatus": "In stock",
+      "id": "GVxlZ4DAto0"
       "id": "6",
       "name": "Mechanical Keyboard",
       "category": "Accessories",
