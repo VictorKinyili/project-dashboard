@@ -36,6 +36,7 @@ export default function AddProduct() {
       return;
     }
 
+    setErrors({});
     setSubmitting(true);
     try {
       await addProduct({
